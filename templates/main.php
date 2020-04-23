@@ -5,10 +5,9 @@
 <pre><?= var_dump($position); ?></pre>
 
 <ul>
-    <?php foreach ($position as $position): ?>
+    <?php foreach ($position as $value): ?>
         <li>
-            <span><?= htmlspecialchars($position['']); ?></span>
-            </div>
+            <?= htmlspecialchars($value['position_name']); ?>
         </li>
     <?php endforeach; ?>
 </ul>
