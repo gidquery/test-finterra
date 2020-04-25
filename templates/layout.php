@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -14,7 +14,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-dark bg-dark">
-    <a class="navbar-toggler mb-0 h1" href="#">Test</a>
+    <a class="navbar-toggler mb-0 h1" href="#">Test-finterra</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,34 +27,39 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
         </form>
     </div>
 </nav>
 
-<main <?php if (isset($main)): ?>class="container"<?php endif; ?>>
-    <?= $content; ?>
+<!-- Боксы -->
+<pre><?= var_dump($categories); ?></pre>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Левый бокс -->
+        <div class="col col-lg-2 border bg-light border-secondary">
+            <h5 class="">Каталог</h5>
+            <?php foreach ($categories as $value): ?>
+                <ul>
+                    <li class="margin-left"  value="<?= $value['id']; ?>">
+                        <a href="#"><?= htmlspecialchars($value['']); ?></a>
+                    </li>
+                </ul>
+            <?php endforeach; ?>
+        </div>
+        <!-- Контент -->
+        <div class="col">
+            <main <?php if (isset($main)): ?>class=""<?php endif; ?>>
+                <?= $content; ?>
+            </main>
+        </div>
+    </div>
+</div>
 
-    <!-- Постраничная навигация -->
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-</main>
+<!-- Футер -->
+<footer class="navbar fixed-bottom navbar-light bg-secondary">
+    <a class="navbar-brand" href="#">Тестовое задание fterra</a>
+</footer>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
