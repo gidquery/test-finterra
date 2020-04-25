@@ -33,7 +33,7 @@
 </nav>
 
 <!-- Боксы -->
-<pre><?= var_dump($categories); ?></pre>
+<!--<pre><?= var_dump($categories); ?></pre>-->
 <div class="container-fluid">
     <div class="row">
         <!-- Левый бокс -->
@@ -41,15 +41,17 @@
             <h5 class="">Каталог</h5>
             <?php foreach ($categories as $value): ?>
                 <ul>
-                    <li class="margin-left"  value="<?= $value['id']; ?>">
-                        <a href="#"><?= htmlspecialchars($value['']); ?></a>
+                    <li class="margin-left">
+                        <a href="href=position.php?id=<?= $value['id']; ?>">
+                        <?= htmlspecialchars($value['category_name']); ?>
+                        </a>
                     </li>
                 </ul>
             <?php endforeach; ?>
         </div>
         <!-- Контент -->
         <div class="col">
-            <main <?php if (isset($main)): ?>class=""<?php endif; ?>>
+            <main class=">
                 <?= $content; ?>
             </main>
         </div>
