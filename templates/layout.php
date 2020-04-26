@@ -33,25 +33,36 @@
 </nav>
 
 <!-- Боксы -->
-<!--<pre><?= var_dump($categories); ?></pre>-->
+<pre><?= var_dump($position); ?></pre>
 <div class="container-fluid">
     <div class="row">
         <!-- Левый бокс -->
-        <div class="col col-lg-2 border bg-light border-secondary">
+        <div class="col col-lg-3">
             <h5 class="">Каталог</h5>
             <?php foreach ($categories as $value): ?>
-                <ul>
-                    <li class="margin-left">
-                        <a href="href=position.php?id=<?= $value['id']; ?>">
-                        <?= htmlspecialchars($value['category_name']); ?>
-                        </a>
+                <ul class="list-group">
+                    <li class="list-group-item align-items-center">
+                        <a href="position.php?id=<?= $value['id']; ?>">
+                            <?= htmlspecialchars($value['category_name']); ?></a>
+                        <span class="badge badge-primary badge-pill"><?= $value['COUNT(position_name)']; ?></span>
+                        <?php
+                        if ($_GET['id'] == $position['id']) {
+                        foreach ($position as $value): ?>}
+                        <ol>
+                            <a href=""><?= htmlspecialchars($value['position_name']); ?></a>
+                        </ol>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
                     </li>
                 </ul>
             <?php endforeach; ?>
+
+
         </div>
+
         <!-- Контент -->
-        <div class="col">
-            <main class=">
+        <div class="col-3">
+            <main class="">
                 <?= $content; ?>
             </main>
         </div>

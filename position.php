@@ -13,10 +13,10 @@ if (empty($categories_id)) {  //Проверяет переменную, воз�
 $query_position = "SELECT categories.id, position_name
 FROM categories
          LEFT JOIN position p ON categories.id = p.category_id
-WHERE categories.id = {$GET['id']}";
+WHERE categories.id = {$categories_id}";
 $result_position = mysqli_query($mysqli_connect, $query_position);// функция для выполнения любых SQL запросов
 if ($result_position) {
-    $position = mysqli_fetch_assoc($result_position);
+    $position = mysqli_fetch_all($result_position, MYSQLI_ASSOC);
 } else {
     show_error($mysqli_connect);
 }
@@ -37,10 +37,10 @@ $layout_content = include_template(
     'layout.php',
     [
         'content' => $page_content,
-        'title' => 'Каталог - Главная страница',
+        'title' => 'Каталог',
         'user' => $user,
         'categories' => $categories,
-        '$position' => $position
+        'position' => $position
     ]
 );
 
