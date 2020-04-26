@@ -33,7 +33,8 @@
 </nav>
 
 <!-- Боксы -->
-<pre><?= var_dump($position); ?></pre>
+<!-- <pre><?= var_dump($position); ?></pre>  -->
+<!-- <pre><?= var_dump($_GET); ?></pre>  -->
 <div class="container-fluid">
     <div class="row">
         <!-- Левый бокс -->
@@ -46,18 +47,16 @@
                             <?= htmlspecialchars($value['category_name']); ?></a>
                         <span class="badge badge-primary badge-pill"><?= $value['COUNT(position_name)']; ?></span>
                         <?php
-                        if ($_GET['id'] == $position['id']) {
-                        foreach ($position as $value): ?>}
-                        <ol>
-                            <a href=""><?= htmlspecialchars($value['position_name']); ?></a>
-                        </ol>
-                        <?php endforeach; ?>
-                        <?php endif; ?>
+                        if ($_GET && $position && ($_GET['id'] === $value['id'])) {
+                            foreach ($position as $value): ?>
+                                <ol>
+                                    <a href="#"><?= htmlspecialchars($value['position_name']); ?></a>
+                                </ol>
+                            <?php endforeach; ?>
+                        <?php }; ?>
                     </li>
                 </ul>
             <?php endforeach; ?>
-
-
         </div>
 
         <!-- Контент -->
@@ -69,10 +68,10 @@
     </div>
 </div>
 
-<!-- Футер -->
+<!-- Футер
 <footer class="navbar fixed-bottom navbar-light bg-secondary">
     <a class="navbar-brand" href="#">Тестовое задание fterra</a>
-</footer>
+</footer> -->
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
