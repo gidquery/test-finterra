@@ -82,21 +82,6 @@ function include_template($name, array $data = [])
 }
 
 /**
- * Проверка данных из формы.
- * @param $data
- * @return string $data
- */
-function check($data)
-{
-    if (isset($data)) {
-        $data = trim($data); // Удаляет пробелы
-        $data = stripslashes($data); // Удаляет экранирование символов, двойные слеши
-        $data = htmlspecialchars($data); // Преобразует специальные символы в HTML-сущности
-    }
-    return $data;
-}
-
-/**
  * Заполнение поля после отпавки формы.
  * @param $name
  * @return mixed|string
@@ -105,21 +90,6 @@ function getPostVal($name)
 {
     htmlspecialchars($name);
     return $_POST[$name] ?? "";
-}
-
-/**
- * Проверка длины поля
- * @param $name string Имя поя.
- * @param $min int
- * @param $max int
- * @return string
- */
-function isCorrectLength($name, $min, $max)
-{
-    $len = strlen($_POST[$name]);
-    if ($len < $min or $len > $max) {
-        return "Значение должно быть от $min до $max символов";
-    }
 }
 
 /**

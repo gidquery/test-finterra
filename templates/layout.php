@@ -14,62 +14,37 @@
 <body>
 
 <nav class="navbar-light bg-light navbar navbar-dark bg-dark">
-    <a class="navbar-toggler mb-0 h1" href="http://test-fterra/">Каталог</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="container">
+        <a class="navbar-toggler mb-0 h1" href="http://test-fterra/">Каталог</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <a class="nav-link" href="#">Вход</a>
-            <a class="nav-link" href="#">Регистрация</a>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
-        </form>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <a class="nav-link" href="#">Вход</a>
+                <a class="nav-link" href="sign-up.php">Регистрация</a>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
+            </form>
+        </div>
     </div>
 </nav>
 
 <!-- Боксы -->
 <!-- <pre><?= var_dump($position); ?></pre>  -->
 <!-- <pre><?= var_dump($_GET); ?></pre>  -->
-<div class="container-fluid">
-    <div class="row">
-        <!-- Левый бокс -->
-        <div class="col col-lg-3">
-            <h5 class="">Каталог</h5>
-            <?php foreach ($categories as $value): ?>
-                <ul class="list-group">
-                    <li class="list-group-item align-items-center">
-                        <a href="position.php?id=<?= $value['id']; ?>">
-                            <?= htmlspecialchars($value['category_name']); ?></a>
-                        <span class="badge badge-primary badge-pill"><?= $value['COUNT(position_name)']; ?></span>
-                        <?php
-                        if ($_GET && $position && ($_GET['id'] === $value['id'])) {
-                            foreach ($position as $value): ?>
-                                <ol>
-                                    <a href="#"><?= htmlspecialchars($value['position_name']); ?></a>
-                                </ol>
-                            <?php endforeach; ?>
-                        <?php }; ?>
-                    </li>
-                </ul>
-            <?php endforeach; ?>
-        </div>
 
-        <!-- Контент -->
-        <div class="col-3">
-            <main class="">
-                <?= $content; ?>
-            </main>
-        </div>
-    </div>
+<!-- Контент -->
+<div class="container">
+    <?= $content; ?>
 </div>
 
 <!-- Футер
-<footer class="navbar fixed-bottom navbar-light bg-secondary">
+<footer class="navbar fixed-bottom navbar-light bg-secondary ">
     <a class="navbar-brand" href="#">Тестовое задание fterra</a>
 </footer> -->
 

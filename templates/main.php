@@ -1,13 +1,24 @@
-<div class="container">    
-</div>
-
-
-
-
-
+<h2 class="text">Категории</h2>
+<?php foreach ($categories as $value): ?>
+    <ul class="list-group">
+        <li class="list-group-item align-items-center">
+            <a href="index.php?id=<?= $value['id']; ?>">
+                <?= htmlspecialchars($value['category_name']); ?></a>
+            <span class="badge badge-primary badge-pill"><?= $value['COUNT(position_name)']; ?></span>
+            <?php
+            if ($_GET && $position && ($_GET['id'] === $value['id'])) {
+                foreach ($position as $value): ?>
+                    <ol>
+                        <div><b><?= htmlspecialchars($value['position_name']); ?></b></div>
+                    </ol>
+                <?php endforeach; ?>
+            <?php }; ?>
+        </li>
+    </ul>
+<?php endforeach; ?>
 
 <!-- Пагинация -->
-<div class="">
+<div class="centr">
 <nav aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item">
