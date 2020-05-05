@@ -129,3 +129,4 @@ function db_fetch_data($link, $sql, $data = [])
     }
     return $result;
 }
+

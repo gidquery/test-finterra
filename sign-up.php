@@ -13,52 +13,49 @@ if ($user) {
 
 // если данные получену методом роst
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    GUMP::add_validator("already_exists",
+        function ($field, array $input, array $params, $value) use (&$mysqli_connect) {
+            $sql_username = "SELECT user_name FROM users WHERE user_name = '{$value}'";// Собственно сам запрос
+            $result_username = mysqli_query($mysqli_connect, $sql_username);// Сначала получаем объект результата
+            if ($result_username) {
+                $row = mysqli_fetch_assoc($result_username);// Затем преобразуем объект результата в виде ассоциативного массива
+            } else {
+                show_error($mysqli_connect);
+            }
+            return empty($row);
+        }, 'имя уже существует');
 
     $gump = new GUMP();
 
 // set validation rules  установить правила проверки
     $gump->validation_rules([
-        'username' => 'required|max_len,30|min_len,3',
+        'username' => 'required|max_len,30|min_len,3|already_exists',
         'password' => 'required|max_len,30|min_len,4'
     ]);
 
 // set field-rule specific error messages   установить специфичные для правила поля сообщения об ошибках
     $gump->set_fields_error_messages([
         'username' => [
-            'required' => 'Поле обязательно для заполнения.',
-            'max_len' => 'Максимальное число символов - 30.',
-            'min_len' => 'Минивальное число символов - 3.'
+            'required' => 'Поле обязательно для заполнения',
+            'max_len' => 'Максимальное число символов - 30',
+            'min_len' => 'Минимальное число символов - 3',
+            'already_exists' => 'имя уже существует'
         ],
         'password' => [
-            'required' => 'Поле обязательно для заполнения.',
-            'max_len' => 'Максимальное число символов - 30.',
-            'min_len' => 'Минивальное число символов - 4.'
+            'required' => 'Поле обязательно для заполнения',
+            'max_len' => 'Максимальное число символов - 30',
+            'min_len' => 'Минимальное число символов - 4'
         ]
     ]);
 
 // set filter rules   установить правила фильтрации
     $gump->filter_rules([
         'username' => 'trim|sanitize_string',
-        'password' => 'trim'
+        'password' => 'trim|sanitize_string'
     ]);
-    
+
 // после проверок и фильтрации помещает все в массив
     $valid_data = $gump->run($_POST);
-
-    $sql_username = "SELECT user_name FROM users WHERE user_name = '{$valid_data['username']}'";// Собственно сам запрос
-    $result_username = mysqli_query($mysqli_connect, $sql_username);// Сначала получаем объект результата
-    if ($result_username) {
-        $row = mysqli_fetch_assoc($result_username);// Затем преобразуем объект результата в виде ассоциативного массива
-    } else {
-        show_error($mysqli_connect);
-    }
-
- //   if ($row)
-
-
-//    if (!empty($row)) {
-//        GUMP::set_error_message('already_exists', '{username} имя уже существует.');
-//    }
 
     if ($valid_data) {
 
@@ -85,8 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $errors = $gump->get_errors_array(); // ['field' => 'Field Somefield is required']
 }
-
-var_dump($errors);
 
 // Подключение шаблонов
 $sign_up_content = include_template(
