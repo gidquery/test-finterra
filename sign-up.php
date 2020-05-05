@@ -13,16 +13,14 @@ if ($user) {
 
 // если данные получену методом роst
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     GUMP::add_validator("already_exists",
         function ($field, array $input, array $params, $value) use (&$mysqli_connect) {
-            $sql_username = "SELECT user_name FROM users WHERE user_name = '{$value}'";// Собственно сам запрос
-            $result_username = mysqli_query($mysqli_connect, $sql_username);// Сначала получаем объект результата
-            if ($result_username) {
-                $row = mysqli_fetch_assoc($result_username);// Затем преобразуем объект результата в виде ассоциативного массива
-            } else {
-                show_error($mysqli_connect);
-            }
-            return empty($row);
+            $sql_username = "SELECT user_name FROM users WHERE user_name = ?";
+            //Создает подготовленное выражение на основе готового SQL запроса и переданных данных
+            $select_users = db_fetch_data($mysqli_connect, $sql_username,[ $value ]
+            );
+            return empty($select_users);
         }, 'имя уже существует');
 
     $gump = new GUMP();
